@@ -7,6 +7,7 @@ First, make sure everyone in your team has a Github account. One person on the t
 
 Now that you have a repo created, using whatever tool you prefer ([Github Desktop Client](https://desktop.github.com/) *recommended*, [Git Kracken](https://www.gitkraken.com/), [Git Bash](https://git-scm.com/downloads)), clone the project in your desktop. Once you have cloned the project, create a new Unity project with Unity Hub in the cloned folder. From there, follow the instructions of your chosen tool to make your first commit and push the code to github.
 
-## Connecting To Qualisys
-The manufacture of the motion capture system we will be using is [Qualisys](https://www.qualisys.com/). You can check out their website here. They also have a [Unity plugin](https://www.qualisys.com/software/unity/) that will make our lives easy. You can install [qualisys plugin](http://www.qualisys.com/download/Qualisys-Real-Time-Streaming.unitypackage) by downloading the package, then opening up your Unity project and in the top menu selecting **Assets->Import Package->Custom Package** and selecting the downloaded file.
+## Importing the Qualisys Library
+The manufacture of the motion capture system we will be using is [Qualisys](https://www.qualisys.com/). You can check out their website here. They also have a [Unity plugin](https://www.qualisys.com/software/unity/) that will make our lives easy. You can install [qualisys plugin](http://www.qualisys.com/download/Qualisys-Real-Time-Streaming.unitypackage) by downloading the package, then opening up your Unity project and in the top menu selecting **Assets->Import Package->Custom Package** and selecting the downloaded file. If you look in the Assets section of the project in Unity, you should now see a project folder.
 
+## Connecting to the Tracking System
