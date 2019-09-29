@@ -11,10 +11,11 @@ Now that you have a repo created, using whatever tool you prefer ([Github Deskto
 The manufacture of the motion capture system we will be using is [Qualisys](https://www.qualisys.com/). You can check out their website here. They also have a [Unity plugin](https://www.qualisys.com/software/unity/) that will make our lives easy. You can install [qualisys plugin](http://www.qualisys.com/download/Qualisys-Real-Time-Streaming.unitypackage) by downloading the package, then opening up your Unity project and in the top menu selecting **Assets->Import Package->Custom Package** and selecting the downloaded file. If you look in the Assets section of the project in Unity, you should now see a project folder.
 
 ## Connecting to the Tracking System
-Get scripts
-Attach connector to game manager
-record your first object to test
-attach qtm script to object
+I've created some simple scripts that are going to make it easy to connect to the Qualisys Track Manager (QTM), they are in this repo and called QTMConnector.cs and QTMObject.cs; download these scripts and add them to your project.
+- **QTMConnector**: Manages connection with the QTM server, and connects automatically on start.
+- **QTMObject**: Using the object name supplied, applies transforms calculated by the QTM system to the tracked object
+
+Create an empty object named *Connection Manager* and attach the `QTMConnector` script to it so that we can connect to the system. Once the script is attached, set the `host` property in the editor to `192.168.1.100` (this is the ip of the QTM server). Now let's create another game object to test the system, any primitive shape will do, and attach the `QTMObject` script to it. Before we can test it out though, you will need to record an object in the system with me. *I will give you instructions on how to do this in person.* Once your object is recorded, enter the name you chose into the `Object Name` field of the QTMObject component on your test object. The last step before we can test is to connect to the right Wifi. The network name is **The Grid** and I will give you the password in person. Once you are connected, hit the play button and move your physical object, if the shape moves and rotates, everything is working!
 
 ## Sensor Fusion
 Camera Parent
