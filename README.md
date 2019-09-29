@@ -18,9 +18,9 @@ I've created some simple scripts that are going to make it easy to connect to th
 Create an empty object named *Connection Manager* and attach the `QTMConnector` script to it so that we can connect to the system. Once the script is attached, set the `host` property in the editor to `192.168.1.100` (this is the ip of the QTM server). Now let's create another game object to test the system, any primitive shape will do, and attach the `QTMObject` script to it. Before we can test it out though, you will need to record an object in the system with me. *I will give you instructions on how to do this in person.* Once your object is recorded, enter the name you chose into the `Object Name` field of the QTMObject component on your test object. The last step before we can test is to connect to the right Wifi. The network name is **The Grid** and I will give you the password in person. Once you are connected, hit the play button and move your physical object, if the shape moves and rotates, everything is working!
 
 ## Connecting Our Headset
-Camera Parent
-QTM Object on parent
-Do offset from accelerometer
+The logic for computing our camera position and location is going to require us to use a parent object like we did before, and a transform proxy for the QTM data. In the end we will need to fuse the data of the phone accelerometer with the motion capture data to get it right. But first let's see what it looks like without any help from the phone's IMU.
+
+Create an empty game object and name it `Camera Parent`, then add the Main Camera to the camera parent. Attach the `QTMObject` to it, and give it the name of your headset as it was registered with the QTM system. Try it out!... It's quite terrible isn't it! That's because the accelerometer is conflicting with QTM data.
 
 ## Making Our Tracking Better
 Creating second object Transform proxy
