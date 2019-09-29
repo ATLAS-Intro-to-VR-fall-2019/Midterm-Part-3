@@ -34,7 +34,49 @@ First, let's create our tracked object. Create an empty game object and name it 
 
 Now let's create a prefab for our drawings. Create a new empty game object and add a `Line Renderer` component to it. We will also want to tweak a couple of values of `LineRenderer` to make things look nice; Set `Positions->Size` to `0` so that we don't have any extra points, and in the Graph looking thing that says `Width`, change the value at the top left of the axis from `1` to `0.05`. Now take the Stroke object from the inspector and drag it into Assets to create the prefab.
 
-Create new stroke and add points while button down
+All we need is a script to add strokes to the scene and pass new points to them. Add a new script to the pen point and name it `PenStroke`. Add the following class variables:
+```
+private GameObject currentStroke; // Holds the current stroke being drawn
+public GameObject strokePrefab; // Reference to the stroke prefab we created before
+private bool isDrawing = false;
+public float minDistance = 0.01f; // Distance required to move the pen before a point will be added
+```
+
+Now in the `Update` method we will need to add our code for creating strokes and adding points to them. First let's create an `if` statement to check if the button has been pressed then inside that if statment we will set `isDrawing` to true and create a new stroke.
+```
+// Check if button is down
+if (Input.GetButtonDown("Fire1")) {
+    isDrawing = true;
+    // Create new stroke
+    currentStroke = Instantiate(strokePrefab);
+}
+```
+Below that, still inside the Update method we need to add code for adding points to the stroke during the main loop. We will also want to limit the points being added by checking if the current transform is far enough away from the last point.
+```
+// While the pen is drawing
+if (isDrawing) {
+    // Get a reference to the line renderer
+    LineRenderer line = currentStroke.GetComponent<LineRenderer>();
+
+    // Automatically add a point if there are no positions
+    if (line.positionCount == 0) {
+        line.positionCount += 1;
+        line.SetPosition(line.positionCount - 1, transform.position);
+    } else {
+        // Get a reference to the last point added
+        Vector3 lastPosition = line.GetPosition(line.positionCount - 1);
+        // compute a vector that points from the last position to the current position
+        Vector3 distanceVec = transform.position - lastPosition;
+        
+        // Add a point if the current position is far enough away
+        if (distanceVec.sqrMagnitude > minDistance * minDistance) {
+            line.positionCount += 1;
+            line.SetPosition(line.positionCount - 1, transform.position);
+        }
+    }
+}
+```
+Test it out, and you should be drawing in VR!
 
 ## Submitting
 Submit a link to your github repo on canvas, and demonstrate to me the final product.
