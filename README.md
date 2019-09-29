@@ -26,10 +26,13 @@ Add second object Transform proxy
 Do diff
 Apply lerp
 
-## Drawing
-Create empty and attach qtm object
-Create stroke prefab
-Add pen body and pen tip
+## Drawing in Mid Air!
+We are one script, and one tracked object away from having a drawing tool put together, yay! Before you can complete this section, you will need to attach markers to your controller and register it with me in the QTM system.
+
+First, let's create our tracked object. Create an empty game object and name it `Pen`, then attach the `QTMObject` script and provide it with the name you gave your controller when you registered it. Let's also add two child objects, one cube and one sphere. Name the cube `Body` and the sphere `Point` and position them so that in VR it would feel like you are holding the body and the point is at the end.
+
+Now let's create a prefab for our drawings. Create a new empty game object and add a `Line Renderer` component to it. We will also want to tweak a couple of values of `LineRenderer` to make things look nice; Set `Positions->Size` to `0` so that we don't have any extra points, and in the Graph looking thing that says `Width`, change the value at the top left of the axis from `1` to `0.05`. Now take the Stroke object from the inspector and drag it into Assets to create the prefab.
+
 Create new stroke and add points while button down
 
 ## Submitting
