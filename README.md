@@ -17,12 +17,13 @@ I've created some simple scripts that are going to make it easy to connect to th
 
 Create an empty object named *Connection Manager* and attach the `QTMConnector` script to it so that we can connect to the system. Once the script is attached, set the `host` property in the editor to `192.168.1.100` (this is the ip of the QTM server). Now let's create another game object to test the system, any primitive shape will do, and attach the `QTMObject` script to it. Before we can test it out though, you will need to record an object in the system with me. *I will give you instructions on how to do this in person.* Once your object is recorded, enter the name you chose into the `Object Name` field of the QTMObject component on your test object. The last step before we can test is to connect to the right Wifi. The network name is **The Grid** and I will give you the password in person. Once you are connected, hit the play button and move your physical object, if the shape moves and rotates, everything is working!
 
-## Sensor Fusion
+## Connecting Our Headset
 Camera Parent
 QTM Object on parent
 Do offset from accelerometer
-realize this is bad
-Add second object Transform proxy
+
+## Making Our Tracking Better
+Creating second object Transform proxy
 Do diff
 Apply lerp
 
