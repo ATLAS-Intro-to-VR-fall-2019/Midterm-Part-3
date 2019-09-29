@@ -4,27 +4,26 @@ using UnityEngine;
 using QTMRealTimeSDK;
 using QualisysRealTime.Unity;
 
-// This class is very similar to QTM's RT Object,
-// but I might need to make changes so I'm keeping it for now
+// This class applies the transform data supplied by qualisys of the given ID to the transform of this object
 public class QTMObject : MonoBehaviour
 {
-    public string objectName;
-    private float updateTimer = 0f;
-
+    public string objectName; // Name of the object as registered in the Qualisys system
     private RTClient rtClient;
-    // Start is called before the first frame update
+ 
     void Start() {
+        // Get a reference to the global Qualisys client object
         rtClient = RTClient.GetInstance();
     }
 
-    // Update is called once per frame
     void Update() {
-        if (updateTimer > 0) updateTimer -= Time.deltaTime;
-
+        // Check if the system is currently streaming
         if (rtClient.GetStreamingStatus()) {
+            // Get the data of the tracked object based on the name supplied
             SixDOFBody trackedObj = rtClient.GetBody(objectName);
 
+            // If this object has a position value, that means it's tracked!
             if (!float.IsNaN(trackedObj.Position.sqrMagnitude)) {
+                // Apply the position and rotation to the object
                 transform.position = trackedObj.Position;
                 transform.rotation = trackedObj.Rotation;
             }
