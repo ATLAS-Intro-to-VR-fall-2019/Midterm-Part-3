@@ -20,14 +20,29 @@ Create an empty object named *Connection Manager* and attach the `QTMConnector` 
 ## Connecting Our Headset
 The logic for computing our camera position and location is going to require us to use a parent object like we did before, and a transform proxy for the QTM data. In the end we will need to fuse the data of the phone accelerometer with the motion capture data to get it right. But first let's see what it looks like without any help from the phone's IMU.
 
-Create an empty game object and name it `Camera Parent`, then add the Main Camera to the camera parent. Attach the `QTMObject` to it, and give it the name of your headset as it was registered with the QTM system. Try it out!... It's quite terrible isn't it! That's because the accelerometer is conflicting with QTM data.
+Create an empty game object and name it `Camera Parent`, then add the Main Camera to the camera parent. Attach the `QTMObject` to it, and give it the name of your headset as it was registered with the QTM system. Try it out!... It's quite terrible isn't it! That's because the accelerometer is conflicting with QTM data. Make sure you add some objects to the scene so you can get a reference for how you are moving around.
 
 ## Making Our Tracking Better
-Creating second object Transform proxy
-Do diff
-Apply lerp
+To fix the errors in the rotation component in our tracking, we will need to find the difference between the target rotation (QTM's data) and the local more responsive rotation (the Phone's IMU). Once we have this difference, we will interoplate between the two over time.
 
-## Drawing in Mid Air!
+First let's create a transform proxy. Remove the QTMObject from the camera parent, then create a new empty object at the scene level called `Camera Proxy`. Attach the QTMObject script to `Camera Proxy` and give it the ID that your headset was registered to in QTM. Now create a script called `CameraTransformCorrection` and add it to the `Camera Parent`, we will be using this script to correct the rotation issues. In the script add the following properties to the class:
+```
+public GameObject mainCamera;
+public GameObject cameraProxy;
+public float lerpSpeed; // speed at which to interpolate between the proxy and main camera
+```
+Then in the Update function, add the following:
+```
+// Calculate the difference in rotation between the proxy rotation and current main camera rotation
+Quaternion correction = cameraProxy.transform.rotation * Quaternion.Inverse(mainCamera.transform.localRotation);
+// Set the rotation value of this camera to be a portion of the offset, over time this will correct slowly
+transform.rotation = Quaternion.Lerp(transform.rotation, correction, lerpSpeed);
+// copy the transform position
+transform.position = cameraProxy.transform.position;
+```
+Then in the editor, attach the `Camera Proxy` object and the `Main Camera` to the `CameraTransformCorrection` on the parent. Adjust the lerp speed to what feels good to you! My phone seems to function best with `0.02` as the speed.
+
+## Drawing in Mid Air
 We are one script, and one tracked object away from having a drawing tool put together, yay! Before you can complete this section, you will need to attach markers to your controller and register it with me in the QTM system.
 
 First, let's create our tracked object. Create an empty game object and name it `Pen`, then attach the `QTMObject` script and provide it with the name you gave your controller when you registered it. Let's also add two child objects, one cube and one sphere. Name the cube `Body` and the sphere `Point` and position them so that in VR it would feel like you are holding the body and the point is at the end.
