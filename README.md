@@ -11,3 +11,30 @@ Now that you have a repo created, using whatever tool you prefer ([Github Deskto
 The manufacture of the motion capture system we will be using is [Qualisys](https://www.qualisys.com/). You can check out their website here. They also have a [Unity plugin](https://www.qualisys.com/software/unity/) that will make our lives easy. You can install [qualisys plugin](http://www.qualisys.com/download/Qualisys-Real-Time-Streaming.unitypackage) by downloading the package, then opening up your Unity project and in the top menu selecting **Assets->Import Package->Custom Package** and selecting the downloaded file. If you look in the Assets section of the project in Unity, you should now see a project folder.
 
 ## Connecting to the Tracking System
+Get scripts
+Attach connector to game manager
+record your first object to test
+attach qtm script to object
+
+## Sensor Fusion
+Camera Parent
+QTM Object on parent
+Do offset from accelerometer
+realize this is bad
+Add second object Transform proxy
+Do diff
+Apply lerp
+
+## Drawing
+Create empty and attach qtm object
+Create stroke prefab
+Add pen body and pen tip
+Create new stroke and add points while button down
+
+## Submitting
+Submit a link to your github repo on canvas, and demonstrate to me the final product.
+
+## Bonus
+Neither of these are required for this assignment, just suggestions for if you want to take this further.
+- Add another type of brush, maybe one that's flat, or a tube **Up to 4pts**
+- Add a color selector, must support at least 5 colors **2 pts**
