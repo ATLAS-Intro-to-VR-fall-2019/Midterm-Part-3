@@ -64,6 +64,10 @@ if (Input.GetButtonDown("Fire1")) {
     // Create new stroke
     currentStroke = Instantiate(strokePrefab);
 }
+
+if (Input.GetButtonUp("Fire1")) {
+    isDrawing = false;
+}
 ```
 Below that, still inside the Update method we need to add code for adding points to the stroke during the main loop. We will also add some code that will prevent points from being added when we haven't moved far enough from the last point.
 ```
